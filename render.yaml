@@ -1,0 +1,44 @@
+services:
+  - type: web_service
+    name: green-idea-backend
+    env: python
+    branch: main
+    root: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+  - type: static_site
+    name: green-idea-frontend
+    env: static
+    branch: main
+    root: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+databases:
+  - name: green-idea-mysql
+    engine: mysql
+    version: "8"
+    plan: starter
+    region: oregon
