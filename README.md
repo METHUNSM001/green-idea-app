@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Green Idea - Smart Farming Platform
 
 A complete agricultural services platform connecting farmers with workers, transporters, equipment providers, and AI-powered farming assistance.
@@ -395,3 +396,4 @@ MIT License - See LICENSE file
 ---
 
 **Made with ❤️ for Indian farmers**
+
