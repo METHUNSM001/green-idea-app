@@ -1,0 +1,153 @@
+# Frontend (React/Vite)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/package-lock.json
+frontend/.DS_Store
+frontend/coverage/
+
+# Mobile (React Native/Expo)
+green-idea-mobile/node_modules/
+green-idea-mobile/.expo/
+green-idea-mobile/.expo-shared/
+green-idea-mobile/dist/
+green-idea-mobile/npm-debug.log*
+green-idea-mobile/yarn-debug.log*
+green-idea-mobile/yarn-error.log*
+green-idea-mobile/package-lock.json
+green-idea-mobile/.env
+green-idea-mobile/.DS_Store
+green-idea-mobile/coverage/
+green-idea-mobile/eas.json
+
+# Backend (Python/Flask)
+backend/venv/
+backend/env/
+backend/.venv/
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/pip-wheel-metadata/
+backend/share/python-wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/MANIFEST
+backend/.env
+backend/.env.local
+backend/instance/
+backend/.webassets-cache
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/.tox/
+backend/.mypy_cache/
+backend/.dmypy.json
+backend/dmypy.json
+backend/.pyre/
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.c9/
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.netlify
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+*.pem
+
+# Testing
+coverage/
+.nyc_output/
+
+# Config files with secrets
+.env
+.env.local
+.env.*.local
+.env.deployment
+
+# Vercel
+.vercel
+
+# Cache
+.cache/
+*.cache
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.mariadb
+
+# Build outputs
+dist/
+build/
+out/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Large files
+*.dmg
+*.iso
+*.img
+*.dmg
+
+# IDE workspace settings
+.workspace
+workspace.json
