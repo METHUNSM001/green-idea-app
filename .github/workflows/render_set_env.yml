@@ -1,0 +1,37 @@
+name: Set Render Backend Env Vars
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set-render-env:
+    runs-on: ubuntu-latest
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+    steps:
+      - name: Set environment variables on Render
+        run: |
+          set -eux
+          api="https://api.render.com/v1/services/$SERVICE_ID/env-vars"
+          create_env() {
+            key="$1"; value="$2"
+            if [ -n "$value" ]; then
+              echo "Setting $key"
+              curl -s -X POST "$api" -H "Authorization: Bearer $RENDER_API_KEY" -H 'Content-Type: application/json' -d "[{\"key\":\"$key\",\"value\":\"$value\",\"sync\":false}]"
+            else
+              echo "Skipping $key (empty)"
+            fi
+          }
+
+          create_env JWT_SECRET "${{ secrets.JWT_SECRET }}"
+          create_env MAIL_USERNAME "${{ secrets.MAIL_USERNAME }}"
+          create_env MAIL_PASSWORD "${{ secrets.MAIL_PASSWORD }}"
+          create_env GROQ_API_KEY "${{ secrets.GROQ_API_KEY }}"
+          create_env OPENWEATHER_API_KEY "${{ secrets.OPENWEATHER_API_KEY }}"
+          create_env DB_HOST "${{ secrets.DB_HOST }}"
+          create_env DB_USER "${{ secrets.DB_USER }}"
+          create_env DB_PASSWORD "${{ secrets.DB_PASSWORD }}"
+          create_env DB_NAME "${{ secrets.DB_NAME }}"
+          create_env ADMIN_EMAIL "${{ secrets.ADMIN_EMAIL }}"
+          create_env ADMIN_PASSWORD "${{ secrets.ADMIN_PASSWORD }}"
