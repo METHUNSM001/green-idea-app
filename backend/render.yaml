@@ -3,7 +3,7 @@ services:
     name: green-idea-backend
     env: python
     branch: main
-    buildCommand: pip install -r requirements.txt
+    buildCommand: python -m pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
       - key: JWT_SECRET
