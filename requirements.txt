@@ -1,0 +1,12 @@
+flask
+flask-cors
+Flask-Mail
+python-dotenv
+PyJWT
+mysql-connector-python
+requests
+gunicorn
+bcrypt
+click
+colorama
+asgiref
