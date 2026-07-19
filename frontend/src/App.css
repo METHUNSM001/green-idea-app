@@ -8,10 +8,49 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  background: #000000;
+}
+
 body {
+  min-height: 100svh;
+  width: 100%;
+  margin: 0;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
   font-family: Arial, sans-serif;
   background: #050505;
   color: white;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100svh;
+  width: 100%;
+}
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+@media (max-width: 900px) {
+  .auth-container {
+    display: block;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .auth-brand,
+  .auth-card {
+    padding: 30px 20px;
+  }
 }
 
 button,
@@ -1661,4 +1700,35 @@ textarea::placeholder {
   .services-header h1 {
     font-size: 24px;
   }
+}
+
+/* NAVBAR */
+.app-nav {
+  width: 100%;
+  background: rgba(13,13,13,0.95);
+  border-bottom: 1px solid #242424;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.app-nav .brand { color: #ff6b00; font-weight: 700; }
+.app-nav .logo { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; color: #ff6b00; border: 2px solid #ff6b00; }
+.nav-links { display: flex; gap: 10px; align-items: center; }
+.nav-links button { background: transparent; color: #ff6b00; border: 1px solid transparent; padding: 8px 12px; border-radius: 8px; }
+.nav-links button:hover { background: rgba(255,107,0,0.08); }
+.nav-toggle { display: none; background: transparent; border: none; padding: 8px; }
+.nav-toggle .hamburger { width: 22px; height: 2px; background: #ff6b00; display: block; position: relative; }
+.nav-toggle .hamburger::before, .nav-toggle .hamburger::after { content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: #ff6b00; }
+.nav-toggle .hamburger::before { top: -7px; }
+.nav-toggle .hamburger::after { top: 7px; }
+
+@media (max-width: 900px) {
+  .nav-links { position: absolute; right: 16px; top: 64px; background: #0d0d0d; border: 1px solid #242424; border-radius: 12px; padding: 12px; display: none; flex-direction: column; min-width: 160px; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: inline-flex; }
 }

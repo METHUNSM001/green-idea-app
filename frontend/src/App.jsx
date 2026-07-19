@@ -9,6 +9,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import Dashboard from "./components/Dashboard";
 import Agriculture from "./components/Agriculture";
 import Services from "./components/Services";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [page, setPage] = useState("loading");
@@ -142,6 +143,8 @@ function App() {
 
   return (
     <div className="app">
+
+      <Navbar user={user} onLogout={handleLogout} onNavigate={setPage} />
 
       {/* LOADING PAGE */}
 

@@ -115,7 +115,7 @@ coverage/
 .env.deployment
 
 # Vercel
-.vercel
+# .vercel
 
 # Cache
 .cache/

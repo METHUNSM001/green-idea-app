@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "../App.css";
+import API_BASE_URL from "../api/apiConfig";
+const EQUIPMENT_API_URL = `${API_BASE_URL}/api/services/equipment`;
 
 function EquipmentService({ onBack, language, setLanguage }) {
   const isTamil = language === "Tamil";
@@ -89,7 +91,7 @@ function EquipmentService({ onBack, language, setLanguage }) {
         params.append("city", filters.query);
       }
       const response = await fetch(
-        `http://127.0.0.1:5000/api/services/equipment?${params.toString()}`
+        `${EQUIPMENT_API_URL}?${params.toString()}`
       );
       const data = await response.json();
       setEquipment(data);
@@ -162,7 +164,7 @@ function EquipmentService({ onBack, language, setLanguage }) {
     setMessage("");
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/services/equipment",
+        EQUIPMENT_API_URL,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -358,12 +360,12 @@ function EquipmentService({ onBack, language, setLanguage }) {
               onDragOver={handleImageDrag}
               onDrop={handleImageDrop}
               style={{
-                border: dragActive ? "2px solid #4CAF50" : "2px dashed #999",
+                border: dragActive ? "2px solid #ff6b00" : "2px dashed #999",
                 padding: "20px",
                 textAlign: "center",
                 borderRadius: "8px",
                 cursor: "pointer",
-                backgroundColor: dragActive ? "#e8f5e9" : "#f9f9f9",
+                backgroundColor: dragActive ? "#fff2e6" : "#f9f9f9",
                 transition: "all 0.3s ease",
               }}
             >

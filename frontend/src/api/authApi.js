@@ -1,5 +1,6 @@
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://127.0.0.1:5000/api/auth";
+import { AUTH_API_URL } from "./apiConfig.js";
+
+const API_URL = AUTH_API_URL;
 
 /*
 =========================================

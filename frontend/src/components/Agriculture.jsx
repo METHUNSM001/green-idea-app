@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../App.css";
+import API_BASE_URL from "../api/apiConfig";
 
 function Agriculture({ onBack, language, setLanguage }) {
   const [activeTab, setActiveTab] =
@@ -232,7 +233,7 @@ function Agriculture({ onBack, language, setLanguage }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/agriculture/recommend",
+        `${API_BASE_URL}/api/agriculture/recommend`,
         {
           method: "POST",
 
@@ -262,7 +263,7 @@ function Agriculture({ onBack, language, setLanguage }) {
   const getWeather = async () => {
     setWeatherLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/agriculture/weather", {
+      const response = await fetch(`${API_BASE_URL}/api/agriculture/weather`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ location: formData.district || "Coimbatore" }),
@@ -284,7 +285,7 @@ function Agriculture({ onBack, language, setLanguage }) {
     if (!chatInput.trim()) return;
     setChatLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/agriculture/chat", {
+      const response = await fetch(`${API_BASE_URL}/api/agriculture/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: chatInput, language }),

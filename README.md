@@ -4,8 +4,8 @@
 A complete agricultural services platform connecting farmers with workers, transporters, equipment providers, and AI-powered farming assistance.
 
 **Live Versions:**
-- 🌐 **Web/PWA**: https://green-idea.vercel.app (Installable on home screen)
-- 📱 **Mobile App**: Available on [Google Play](#) | [App Store](#) (Coming soon)
+- 🌐 **Backend API**: https://green-idea-backend.onrender.com
+- 📱 **Mobile App**: React Native + Expo (Expo Go or EAS build)
 
 ## 📋 Project Overview
 
@@ -24,8 +24,8 @@ Green Idea is a comprehensive platform that enables:
 | **Frontend (Mobile)** | React Native + Expo |
 | **Backend** | Flask + Python |
 | **Database** | MySQL 8.x |
-| **Deployment (Web)** | Vercel |
-| **Deployment (Mobile)** | Expo/EAS + App Stores |
+| **Backend Deployment** | Render |
+| **Mobile Deployment** | Expo/EAS + App Stores |
 | **External APIs** | OpenWeather, Groq AI |
 
 ## 🚀 Quick Start
@@ -72,7 +72,6 @@ green-idea/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html              # PWA meta tags
-│   ├── vercel.json             # Vercel config
 │   ├── vite.config.js
 │   ├── PWA_SETUP.md            # PWA guide
 │   └── package.json
@@ -94,7 +93,7 @@ green-idea/
     └── .env                    # Secrets
 ```
 
-## 🌐 Web/PWA Version (Vercel Deployment)
+## 🌐 Backend Deployment (Render)
 
 ### Installation on Mobile
 
@@ -108,16 +107,24 @@ green-idea/
 2. Share (↗️) → "Add to Home Screen"
 3. Accept and app appears on home screen
 
-### Deploy to Vercel
+### Deploy Backend to Render
 
 ```bash
-cd frontend
-npm run build      # Build for production
-vercel --prod      # Deploy to production
+cd backend
+# Ensure your backend env vars are configured in Render dashboard
+# Then push to the Render-linked repo branch or use Render deploy
 ```
 
-Environment variables needed in Vercel dashboard:
-- `VITE_API_URL` - Backend API URL
+Environment variables needed in Render service:
+- `JWT_SECRET`
+- `MAIL_USERNAME`
+- `MAIL_PASSWORD`
+- `GROQ_API_KEY`
+- `OPENWEATHER_API_KEY`
+- `DB_HOST`
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_NAME`
 
 ### Features (Web/PWA)
 - ✅ Installable on home screen
@@ -307,12 +314,12 @@ equipment_services:
 - [ ] Set up monitoring/logging
 - [ ] Test mobile app on multiple devices
 
-### Web/PWA (Vercel)
+### Backend (Render)
 - [ ] Connect GitHub repository
-- [ ] Configure environment variables
-- [ ] Enable automatic deployments
-- [ ] Test PWA installation
-- [ ] Check offline functionality
+- [ ] Configure Render environment variables
+- [ ] Deploy backend service to Render
+- [ ] Test API end-to-end with mobile app
+- [ ] Verify CORS and HTTPS functionality
 
 ### Mobile (App Stores)
 - [ ] Build production APK/IPA

@@ -38,10 +38,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Skip API calls to backend
-  if (event.request.url.includes('http://127.0.0.1:5000') || 
-      event.request.url.includes('api.groq.com') ||
-      event.request.url.includes('api.openweathermap.org')) {
+  // Skip API calls to backend and external APIs
+  if (
+    event.request.url.includes('/api/') ||
+    event.request.url.includes('api.groq.com') ||
+    event.request.url.includes('api.openweathermap.org')
+  ) {
     return;
   }
 
