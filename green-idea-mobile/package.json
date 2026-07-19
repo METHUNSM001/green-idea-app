@@ -1,0 +1,37 @@
+{
+  "name": "green-idea-mobile",
+  "version": "1.0.0",
+  "description": "Green Idea - Smart Farming Platform (React Native)",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "build:android": "eas build --platform android",
+    "build:ios": "eas build --platform ios"
+  },
+  "dependencies": {
+    "expo": "~50.0.0",
+    "expo-screen-orientation": "~7.0.0",
+    "expo-image-picker": "~14.7.1",
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/stack": "^6.3.20",
+    "react-native-screens": "~3.27.0",
+    "react-native-safe-area-context": "4.7.2",
+    "react-native-gesture-handler": "~2.14.0",
+    "axios": "^1.6.0",
+    "async-storage": "^1.23.1",
+    "@react-native-async-storage/async-storage": "1.21.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.2.45",
+    "@types/react-native": "~0.73.0"
+  },
+  "private": true
+}

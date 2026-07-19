@@ -1,0 +1,90 @@
+{
+  "name": "Green Idea - Smart Farming Platform",
+  "short_name": "Green Idea",
+  "description": "Connect farmers with agricultural services, workers, transport, and smart farming solutions",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "categories": ["agriculture", "productivity"],
+  "screenshots": [
+    {
+      "src": "/icons/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/icons/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Smart Farming",
+      "short_name": "Farming",
+      "description": "Get AI-powered crop recommendations",
+      "url": "/dashboard?view=agriculture",
+      "icons": [
+        {
+          "src": "/icons/farming-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Find Jobs",
+      "short_name": "Jobs",
+      "description": "Find agricultural job opportunities",
+      "url": "/dashboard?view=services",
+      "icons": [
+        {
+          "src": "/icons/jobs-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Get Transport",
+      "short_name": "Transport",
+      "description": "Find transport services",
+      "url": "/dashboard?view=services&service=transport",
+      "icons": [
+        {
+          "src": "/icons/transport-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
