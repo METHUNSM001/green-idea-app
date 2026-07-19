@@ -80,3 +80,27 @@ curl -X POST https://api.render.com/v1/services/{service_id}/env-vars \
 ```
 
 If you'd like, I can prepare a fully automated Render API script that creates services and sets env vars — you'll need to provide a Render API key or run it locally.
+
+---
+
+Vercel (Frontend) Setup
+------------------------
+
+We recommend deploying the frontend to Vercel and keeping the Flask backend on Render.
+
+1. In Vercel, create a new Project and import your GitHub repo `METHUNSM001/green-idea-app`.
+	- Set the Root Directory to `frontend`.
+	- Build Command: `npm ci && npm run build`
+	- Output Directory: `dist`
+
+2. The repository includes `frontend/vercel.json` which configures the static build for Vercel.
+
+3. In the Vercel project Settings → Environment Variables, add:
+	- `VITE_API_URL` — URL of your backend (e.g., `https://green-idea-backend.onrender.com`).
+
+4. Deploy: push to `main` or trigger a Vercel deploy from the dashboard.
+
+Notes
+- Ensure your backend on Render is deployed and reachable before setting `VITE_API_URL` in Vercel.
+- For preview deployments, set the same env var in the Preview environment so the app points to the correct backend.
+
