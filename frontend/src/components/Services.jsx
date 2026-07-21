@@ -2,7 +2,6 @@ import { useState } from "react";
 import Workers from "./Workers";
 import TransportService from "./TransportService";
 import EquipmentService from "./EquipmentService";
-import "../App.css";
 
 function Services({ onBack, language, setLanguage }) {
   const isTamil = language === "Tamil";

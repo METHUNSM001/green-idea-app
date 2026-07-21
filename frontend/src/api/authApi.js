@@ -1,144 +1,37 @@
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://127.0.0.1:5000/api/auth";
+import { AUTH_API_URL } from "./apiConfig.js";
+import { apiRequest } from "./apiClient.js";
 
-/*
-=========================================
-REGISTER USER
-=========================================
-*/
-
-export const registerUser = async (userData) => {
-  const response = await fetch(`${API_URL}/register`, {
+export const registerUser = (userData) =>
+  apiRequest(`${AUTH_API_URL}/register`, {
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify(userData),
+    body: userData,
+    fallbackError: "Registration failed",
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Registration failed");
-  }
-
-  return data;
-};
-
-/*
-=========================================
-LOGIN USER
-=========================================
-*/
-
-export const loginUser = async (email, password) => {
-  const response = await fetch(`${API_URL}/login`, {
+export const loginUser = (email, password) =>
+  apiRequest(`${AUTH_API_URL}/login`, {
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email,
-      password,
-    }),
+    body: { email, password },
+    fallbackError: "Login failed",
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Login failed");
-  }
-
-  return data;
-};
-
-/*
-=========================================
-FORGOT PASSWORD
-=========================================
-*/
-
-export const forgotPassword = async (email) => {
-  const response = await fetch(`${API_URL}/forgot-password`, {
+export const forgotPassword = (email) =>
+  apiRequest(`${AUTH_API_URL}/forgot-password`, {
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email,
-    }),
+    body: { email },
+    fallbackError: "Unable to send OTP",
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Unable to send OTP");
-  }
-
-  return data;
-};
-
-/*
-=========================================
-VERIFY OTP
-=========================================
-*/
-
-export const verifyOtp = async (email, otp) => {
-  const response = await fetch(`${API_URL}/verify-otp`, {
+export const verifyOtp = (email, otp) =>
+  apiRequest(`${AUTH_API_URL}/verify-otp`, {
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email,
-      otp,
-    }),
+    body: { email, otp },
+    fallbackError: "OTP verification failed",
   });
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "OTP verification failed");
-  }
-
-  return data;
-};
-
-/*
-=========================================
-RESET PASSWORD
-=========================================
-*/
-
-export const resetPassword = async (email, otp, newPassword) => {
-  const response = await fetch(`${API_URL}/reset-password`, {
+export const resetPassword = (email, otp, newPassword) =>
+  apiRequest(`${AUTH_API_URL}/reset-password`, {
     method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      email,
-      otp,
-      new_password: newPassword,
-    }),
+    body: { email, otp, new_password: newPassword },
+    fallbackError: "Password reset failed",
   });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Password reset failed");
-  }
-
-  return data;
-};

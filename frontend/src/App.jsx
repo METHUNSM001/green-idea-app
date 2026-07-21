@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { isAdminUser } from "./utils/adminUser";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -38,14 +39,14 @@ function App() {
           const parsedUser = JSON.parse(savedUser);
           const normalizedUser = {
             ...parsedUser,
-            is_admin: Boolean(parsedUser?.is_admin) || ["smmethun2006@gmail.com", "smmethun2006@gmil.com", "tsmmethun2006@gmail.com"].includes((parsedUser?.email || "").toLowerCase()),
+            is_admin: isAdminUser(parsedUser),
             email: parsedUser?.email || "",
-            username: parsedUser?.username || "Admin",
+            username: parsedUser?.username || "Farmer",
           };
           setUser(normalizedUser);
           setPage("dashboard");
         } catch (error) {
-          console.error("Invalid saved user data");
+          console.error("Invalid saved user data:", error);
 
           localStorage.removeItem("greenIdeaUser");
           localStorage.removeItem("greenIdeaToken");
@@ -96,9 +97,9 @@ function App() {
   const handleLoginSuccess = (userData) => {
     const normalizedUser = {
       ...userData,
-      is_admin: Boolean(userData?.is_admin) || ["smmethun2006@gmail.com", "smmethun2006@gmil.com", "tsmmethun2006@gmail.com"].includes((userData?.email || "").toLowerCase()),
+      is_admin: isAdminUser(userData),
       email: userData?.email || "",
-      username: userData?.username || "Admin",
+      username: userData?.username || "Farmer",
     };
 
     setUser(normalizedUser);

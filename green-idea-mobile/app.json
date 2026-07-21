@@ -39,7 +39,7 @@
       ]
     ],
     "extra": {
-      "apiUrl": "http://localhost:5000",
+      "apiUrl": "https://green-idea-backend.onrender.com",
       "eas": {
         "projectId": "your-eas-project-id"
       }

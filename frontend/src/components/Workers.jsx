@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { addWorker, fetchWorkers } from "../api/workersApi";
-import "../App.css";
 
 function Workers({ onBack, language, setLanguage }) {
   const isTamil = language === "Tamil";
@@ -12,9 +11,11 @@ function Workers({ onBack, language, setLanguage }) {
   const [message, setMessage] = useState("");
   const [copiedPhone, setCopiedPhone] = useState("");
 
-  const uiText = isTamil
-    ? {
-        back: "← பின்செல்",
+  const uiText = useMemo(
+    () =>
+      isTamil
+        ? {
+            back: "← பின்செல்",
         heading: "👨‍🌾 தொழிலாளர் சேவைகள்",
         eyebrow: "வேலைவாய்ப்பு",
         subtitle: "வேலைக்காகத் தேடும் தொழிலாளர்கள் பட்டியலைப் பார்க்கவும் மற்றும் அவர்களை தொடர்பு கொள்ளவும்.",
@@ -56,7 +57,9 @@ function Workers({ onBack, language, setLanguage }) {
         copyHint: "Phone copied to clipboard",
         success: "Worker registered successfully",
         error: "Unable to register worker",
-      };
+      },
+    [isTamil]
+  );
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -94,9 +97,8 @@ function Workers({ onBack, language, setLanguage }) {
       await navigator.clipboard.writeText(phone);
       setCopiedPhone(phone);
       setTimeout(() => setCopiedPhone(""), 1500);
-      window.location.href = `tel:${phone}`;
-    } catch {
-      window.location.href = `tel:${phone}`;
+    } finally {
+      window.open(`tel:${phone}`, "_self");
     }
   };
 

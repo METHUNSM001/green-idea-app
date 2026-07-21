@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../App.css";
+import { getCropRecommendation, getWeatherForecast, askFarmingAssistant } from "../api/agricultureApi";
 
 function Agriculture({ onBack, language, setLanguage }) {
   const [activeTab, setActiveTab] =
@@ -231,25 +231,7 @@ function Agriculture({ onBack, language, setLanguage }) {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/agriculture/recommend",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Recommendation failed");
-      }
-
+      const data = await getCropRecommendation(formData);
       setRecommendation(data);
     } catch (error) {
       console.error(error);
@@ -262,15 +244,7 @@ function Agriculture({ onBack, language, setLanguage }) {
   const getWeather = async () => {
     setWeatherLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/agriculture/weather", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ location: formData.district || "Coimbatore" }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || "Weather fetch failed");
-      }
+      const data = await getWeatherForecast(formData.district || "Coimbatore");
       setWeather(data);
     } catch (error) {
       alert(error.message || "Unable to fetch weather");
@@ -284,15 +258,7 @@ function Agriculture({ onBack, language, setLanguage }) {
     if (!chatInput.trim()) return;
     setChatLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/agriculture/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: chatInput, language }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || "Assistant failed");
-      }
+      const data = await askFarmingAssistant(chatInput, language);
       setChatReply(data.reply || "");
       setChatInput("");
     } catch (error) {

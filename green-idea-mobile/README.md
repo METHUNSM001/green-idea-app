@@ -62,7 +62,7 @@ green-idea-mobile/
 
 Create `.env` file:
 ```
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=https://green-idea-backend.onrender.com
 REACT_APP_API_TIMEOUT=30000
 ```
 

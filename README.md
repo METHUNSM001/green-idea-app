@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 # Green Idea - Smart Farming Platform
 
 A complete agricultural services platform connecting farmers with workers, transporters, equipment providers, and AI-powered farming assistance.
 
 **Live Versions:**
-- 🌐 **Web/PWA**: https://green-idea.vercel.app (Installable on home screen)
-- 📱 **Mobile App**: Available on [Google Play](#) | [App Store](#) (Coming soon)
+- 🌐 **Backend API**: https://green-idea-backend.onrender.com
+- 📱 **Mobile App**: React Native + Expo (Expo Go or EAS build)
 
 ## 📋 Project Overview
 
@@ -20,12 +19,13 @@ Green Idea is a comprehensive platform that enables:
 
 | Component | Technology |
 |---|---|
-| **Frontend (Web/PWA)** | React 18 + Vite |
+| **Frontend (Web/PWA)** | React 19 + Vite |
 | **Frontend (Mobile)** | React Native + Expo |
 | **Backend** | Flask + Python |
-| **Database** | MySQL 8.x |
-| **Deployment (Web)** | Vercel |
-| **Deployment (Mobile)** | Expo/EAS + App Stores |
+| **Database** | Supabase (Postgres) |
+| **Backend Deployment** | Render |
+| **Frontend Deployment** | Vercel |
+| **Mobile Deployment** | Expo/EAS + App Stores |
 | **External APIs** | OpenWeather, Groq AI |
 
 ## 🚀 Quick Start
@@ -72,7 +72,6 @@ green-idea/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html              # PWA meta tags
-│   ├── vercel.json             # Vercel config
 │   ├── vite.config.js
 │   ├── PWA_SETUP.md            # PWA guide
 │   └── package.json
@@ -94,7 +93,7 @@ green-idea/
     └── .env                    # Secrets
 ```
 
-## 🌐 Web/PWA Version (Vercel Deployment)
+## 🌐 Backend Deployment (Render)
 
 ### Installation on Mobile
 
@@ -108,16 +107,23 @@ green-idea/
 2. Share (↗️) → "Add to Home Screen"
 3. Accept and app appears on home screen
 
-### Deploy to Vercel
+### Deploy Backend to Render
 
-```bash
-cd frontend
-npm run build      # Build for production
-vercel --prod      # Deploy to production
-```
+The repo includes a Render Blueprint (`render.yaml` at the repo root). In
+the Render dashboard: New -> Blueprint -> connect this repo. Render reads
+`render.yaml`, builds from the `backend/` folder automatically, and
+prompts you for each variable below on first setup.
 
-Environment variables needed in Vercel dashboard:
-- `VITE_API_URL` - Backend API URL
+Environment variables needed in Render service:
+- `DATABASE_URL` (Supabase Postgres connection string)
+- `JWT_SECRET`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+- `MAIL_USERNAME`
+- `MAIL_PASSWORD`
+- `GROQ_API_KEY`
+- `OPENWEATHER_API_KEY`
+- `FRONTEND_ORIGINS` (your Vercel URL, comma-separated if more than one)
 
 ### Features (Web/PWA)
 - ✅ Installable on home screen
@@ -186,17 +192,18 @@ Runs on `http://localhost:5000`
 
 ### Environment Variables (.env)
 
+See `backend/.env.example` for the full list with comments. Summary:
+
 ```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=green_idea
+DATABASE_URL=postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres
 JWT_SECRET=your_jwt_secret
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_app_password
 ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=your_admin_password
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_16_char_app_password
 GROQ_API_KEY=your_groq_api_key
 OPENWEATHER_API_KEY=your_openweather_api_key
+FRONTEND_ORIGINS=http://localhost:5173
 ```
 
 ### API Endpoints
@@ -276,10 +283,13 @@ equipment_services:
   - district
   - city
   - price
-  - image_url (Base64)
+  - image_url (Supabase Storage public URL, not the image itself)
   - available
   - created_at
 ```
+
+All tables live in Supabase Postgres - see `supabase/schema.sql` for the
+full migration (also applied directly to the project already).
 
 ---
 
@@ -287,10 +297,16 @@ equipment_services:
 
 - ✅ Bcrypt password hashing
 - ✅ JWT token authentication
-- ✅ CORS configuration
-- ✅ Admin email aliases
-- ✅ OTP-based password reset
+- ✅ CORS restricted to `FRONTEND_ORIGINS` (not wide open)
+- ✅ Admin credentials required via environment variables (no hardcoded
+      fallback password in source)
+- ✅ OTP-based password reset (same response whether or not the email exists)
+- ✅ Row Level Security enabled on every Supabase table
 - ✅ Service worker cache validation
+- ⚠️ Worker/transporter/equipment registration endpoints have no
+      server-side auth check yet (the frontend sends a token, the backend
+      doesn't verify it) - decide if these should require login before
+      relying on that as an access boundary.
 
 ---
 
@@ -307,12 +323,12 @@ equipment_services:
 - [ ] Set up monitoring/logging
 - [ ] Test mobile app on multiple devices
 
-### Web/PWA (Vercel)
+### Backend (Render)
 - [ ] Connect GitHub repository
-- [ ] Configure environment variables
-- [ ] Enable automatic deployments
-- [ ] Test PWA installation
-- [ ] Check offline functionality
+- [ ] Configure Render environment variables
+- [ ] Deploy backend service to Render
+- [ ] Test API end-to-end with mobile app
+- [ ] Verify CORS and HTTPS functionality
 
 ### Mobile (App Stores)
 - [ ] Build production APK/IPA
@@ -341,12 +357,16 @@ equipment_services:
 # Check if Flask is running
 python app.py
 
-# Verify MySQL is running
-mysql -u root -p
+# Test the Supabase connection string directly
+psql "$DATABASE_URL" -c "select 1;"
 
-# Check environment variables
-cat .env
+# Check environment variables are set (values hidden)
+python -c "import config; print('config loaded OK')"
 ```
+If that fails with an auth error, double check the password in
+`DATABASE_URL` against Supabase Dashboard -> Project Settings ->
+Database (the password isn't retrievable from the API - reset it there
+if you don't have it).
 
 ### Frontend build fails
 ```bash

@@ -1,0 +1,40 @@
+# Render Blueprint for the Green Idea backend.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# This file lives at the repo root (not inside backend/) so Render can
+# find it automatically; rootDir below points it at the backend folder
+# since this is a monorepo (backend/frontend/green-idea-mobile).
+#
+# To deploy: dashboard.render.com -> New -> Blueprint -> connect this repo.
+# Render will prompt for every "sync: false" value below on first setup.
+services:
+  - type: web
+    name: green-idea-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    branch: main
+    healthCheckPath: /
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: FLASK_DEBUG
+        value: "false"

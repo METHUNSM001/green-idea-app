@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { addTransporter, fetchTransporters } from "../api/transportApi";
-import "../App.css";
 
 function TransportService({ onBack, language, setLanguage }) {
   const isTamil = language === "Tamil";

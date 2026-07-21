@@ -40,14 +40,8 @@ npm run dev
 npm run build
 ```
 
-### Deploy to Vercel
-```bash
-# First time setup
-vercel
-
-# Subsequent deployments
-vercel --prod
-```
+### Deploy to Render
+Deploy the backend service using `backend/render.yaml` and configure Render environment variables.
 
 ## Environment Variables (.env)
 

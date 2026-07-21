@@ -10,7 +10,6 @@ frontend/.env.production.local
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
-frontend/package-lock.json
 frontend/.DS_Store
 frontend/coverage/
 
@@ -22,7 +21,6 @@ green-idea-mobile/dist/
 green-idea-mobile/npm-debug.log*
 green-idea-mobile/yarn-debug.log*
 green-idea-mobile/yarn-error.log*
-green-idea-mobile/package-lock.json
 green-idea-mobile/.env
 green-idea-mobile/.DS_Store
 green-idea-mobile/coverage/
@@ -115,7 +113,7 @@ coverage/
 .env.deployment
 
 # Vercel
-.vercel
+# .vercel
 
 # Cache
 .cache/

@@ -1,4 +1,5 @@
-import "../App.css";
+
+import { isAdminUser } from "../utils/adminUser";
 
 function Dashboard({
   user,
@@ -70,7 +71,7 @@ function Dashboard({
       };
 
   const features = uiText.features;
-  const isAdminAccount = Boolean(user?.is_admin) || ["smmethun2006@gmail.com", "smmethun2006@gmil.com", "tsmmethun2006@gmail.com"].includes((user?.email || "").toLowerCase());
+  const isAdminAccount = isAdminUser(user);
 
   return (
     <div className="dashboard-page">
@@ -195,7 +196,7 @@ function Dashboard({
           </div>
 
           {isAdminAccount ? (
-            <div className="services-card admin-card" style={{ marginTop: "20px" }}>
+            <div className="services-card admin-card admin-card-inline">
               <h4>{isTamil ? "நிர்வாக புலம்" : "Admin Area"}</h4>
               <p>{isTamil ? "போக்குவரத்து வழங்குநர்களை நிர்வகிக்க இந்தப் பகுதியைப் பயன்படுத்தவும்." : "Use this area to manage transport providers."}</p>
               <button type="button" className="service-button" onClick={onOpenServices}>{isTamil ? "நிர்வாகப் பக்கத்திற்கு செல்" : "GO TO ADMIN PAGE"}</button>
